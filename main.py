@@ -1,22 +1,45 @@
-# Name: Joshua Gutierrez
-# Date: November 16 2025
-# Description: Main program for online shopping cart
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Filename: main.py
+Author: Joshua R. Gutierrez
+Date: November 16, 2025
+Version: 1.0
+Description: Main program that runs the menu interface for the shopping cart.
+"""
 
 from item_to_purchase import ItemToPurchase
 from shopping_cart import ShoppingCart
 
-def print_menu(cart: ShoppingCart):
-    choice = ""
-    while choice != "q":
-        print()
-        print("MENU")
-        print("a - Add item to cart")
-        print("r - Remove item from cart")
-        print("c - Change item quantity")
-        print("i - Output items' descriptions")
-        print("o - Output shopping cart")
-        print("q - Quit")
 
+def get_cart_info():
+    """Prompt the user for customer name and current date."""
+    name = input("Enter customer's name:\n")
+    date = input("Enter today's date:\n")
+    print()
+    print("Customer name:", name)
+    print("Today's date:", date)
+    return name, date
+
+
+def show_menu_options():
+    """Display the menu options."""
+    print()
+    print("MENU")
+    print("a - Add item to cart")
+    print("r - Remove item from cart")
+    print("c - Change item quantity")
+    print("i - Output items' descriptions")
+    print("o - Output shopping cart")
+    print("q - Quit")
+
+
+def print_menu(cart: ShoppingCart):
+    """Handle user input for menu operations on the shopping cart."""
+    choice = ""
+
+    while choice != "q":
+        show_menu_options()
         choice = input("Choose an option:\n")
 
         if choice == "a":
@@ -49,22 +72,20 @@ def print_menu(cart: ShoppingCart):
             cart.print_total()
 
         elif choice == "q":
-            # Quit menu loop
-            continue
+            # Quit the menu
+            break
 
         else:
-            # Invalid input, loop will reprint menu
+            # Invalid input, loop continues and menu is shown again
             continue
 
-def main():
-    customer_name = input("Enter customer's name:\n")
-    current_date = input("Enter today's date:\n")
-    print()
-    print("Customer name:", customer_name)
-    print("Today's date:", current_date)
 
+def main():
+    """Main entry point for the shopping cart program."""
+    customer_name, current_date = get_cart_info()
     cart = ShoppingCart(customer_name, current_date)
     print_menu(cart)
+
 
 if __name__ == "__main__":
     main()
